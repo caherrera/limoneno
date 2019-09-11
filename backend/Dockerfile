@@ -23,4 +23,4 @@ EXPOSE 5000
 # run DB migrations
 #RUN rake db:create db:migrate
 # Run the app
-CMD ["bash", "-c", "rake db:create db:migrate db:seed && foreman start"] 
+CMD ["bash", "-c", "rake db:create db:migrate db:seed && RAILS_ENV=production foreman start"] 
