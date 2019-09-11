@@ -26,30 +26,15 @@ module Versions
           when "text/plain"
             file = DatasetService::Files.upload_txt params
           when "text/csv"
-            file = DatasetService::Files.upload_csv params
+            # file = DatasetService::Files.upload_csv params
+            return status 415 unless file
           else
             return status 415 unless file
           end
 
-          result = []
-
-          file.each do |item|
-            ditem = DatasetItem.create({
-              dataset_id: dataset_id,
-              name: item[:name],
-              mime: mime,
-              text: item[:text],
-              metadata: item[:metadata],
-              url: item[:url],
-              status: item[:status]
-            });
-
-            result.push(ditem) if ditem
-          end
-
           status 201
 
-          result
+          file
         end
 
         # UPDATE DATASET METHOD

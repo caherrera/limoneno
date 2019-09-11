@@ -12,6 +12,7 @@ module MidasService
 
     # For PDF files use 'file_type = Midas::InputFormat::PDF'
     def self.get_file_text(file, file_type = Midas::InputFormat::INPUT_FORMAT_AUTO)
+      puts file
       raise(Exception, 'File not provided.') unless file.present?
 
       request = prepare_request(file, file_type)
