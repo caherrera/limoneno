@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package midas;
+import "midas/midas_message.proto";
+option csharp_namespace = "Namku.Grpc.Services.Midas";
+option java_package = "namku.grpc.services.midas";
+
+service MidasService {
+    rpc GetText(midas.GetTextRequest) returns (stream midas.GetTextResponse);
+    rpc GetImages(midas.GetImagesRequest) returns (stream midas.GetImagesResponse);
+}

@@ -1,0 +1,78 @@
+syntax = "proto3";
+
+package midas;
+option csharp_namespace = "Namku.Grpc.Services.Midas";
+option java_package = "namku.grpc.services.midas";
+
+message OcrConfig {
+    enum Psm {
+        FULLY_AUTOMATIC_PAGE_SEGMENTATION_WITHOUT_OSD = 0;
+        OSD_ONLY = 1;
+        AUTOMATIC_PAGE_SEGMENTATION_WITH_OSD = 2;
+        AUTOMATIC_PAGE_SEGMENTATION_WITHOUT_OSD = 3;
+        ASSUME_SINGLE_COLUMN_TEXT = 4;
+        ASSUME_SINGLE_BLOCK_VERTICAL_TEXT = 5;
+        ASSUME_SINGLE_BLOCK_TEXT = 6;
+        TREAT_IMAGE_SINGLE_TEXT_LINE = 7;
+        TREAT_IMAGE_SINGLE_WORD = 8;
+        TREAT_IMAGE_SINGLE_WORD_IN_A_CIRCLE = 9;
+        TREAT_IMAGE_SINGLE_CHARACTER = 10;
+        SPARSE_TEXT = 11;
+        SPARSE_TEXT_WITH_OSD = 12;
+        RAW_LINE = 13;
+    }
+    enum Model {
+        NORMAL = 0;
+        FAST = 1;
+        BEST = 2;
+    }
+    enum Oem {
+        LSTM = 0;
+        LEGACY = 1;
+        LEGACY_LSTM = 2;
+        FIRST_TO_FOUND = 3;
+    }
+    Psm psm = 1;
+    string lang = 2;
+    Model model = 3;
+    Oem oem = 4;
+}
+
+enum InputFormat {
+    INPUT_FORMAT_AUTO = 0;
+    PDF = 1;
+}
+enum OutputFormat {
+    PLAIN_TEXT = 0;
+    PLAIN_TEXT_WITH_SIGNATURES = 1;
+    HTML_TABLE = 2;
+}
+
+message GetTextRequest {
+    message Config {
+        OcrConfig ocr = 1;
+        string pages = 2;
+        float min_image_ratio = 3;
+    }
+    bytes file = 1;
+    InputFormat input_format = 2;
+    OutputFormat output_format = 3;
+    Config config = 4;
+}
+
+message GetTextResponse {
+    string text = 1;
+    int32 page = 2;
+}
+
+message GetImagesRequest {
+    bytes file = 1;
+    InputFormat input_format = 2;
+    string pages = 3;
+}
+
+message GetImagesResponse {
+    bytes image = 1;
+    int32 page = 2;
+    string format = 3;
+}
