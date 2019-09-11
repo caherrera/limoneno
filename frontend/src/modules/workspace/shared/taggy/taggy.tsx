@@ -24,10 +24,12 @@ export class Taggy extends React.Component<any> {
       end: (this.props.text) ? this.props.text.length - 1 : 0,
       tag: false,
       color: '',
-      type: ''
+      type: '',
+      label: ''
     }];
 
     this.props.spans.map((tag:DatasetItemTag) => {
+      console.log(this.props.ents);
       let type = this.props.ents.find((ent: any) => {
         return ent.type === tag.type;
       });
@@ -54,7 +56,8 @@ export class Taggy extends React.Component<any> {
       end: tag.end,
       tag: true,
       color: (type) ? type.color : '#FFFFF',
-      type: (type) ? type.type : ''
+      type: (type) ? type.type : '',
+      label: (type) ? type.label : ''
     });
 
     this.objects.push({
@@ -63,7 +66,8 @@ export class Taggy extends React.Component<any> {
       end: tag.start,
       tag: false,
       color: '',
-      type: ''
+      type: '',
+      label: ''
     });
 
     this.objects.push({
@@ -72,7 +76,8 @@ export class Taggy extends React.Component<any> {
       end: (item.end === this.props.text.length - 1) ? item.end: item.text.length - 1,
       tag: false,
       color: '',
-      type: ''
+      type: '',
+      label: ''
     });
 
     this.objects.sort((a:TagItem, b:TagItem) => {
@@ -91,7 +96,7 @@ export class Taggy extends React.Component<any> {
         return (
           <Tag color={tag.color} key={index} className="tag">
             {tag.text + '  '}
-            <b>{'(' + tag.type + ')'}</b>
+            <b>{'(' + tag.label + ')'}</b>
             <Icon type="close" onClick={this.deleteTag.bind(this, tag)}></Icon>
           </Tag>
         )
@@ -119,6 +124,7 @@ interface TagItem {
   tag: boolean;
   color: string;
   type: string | null;
+  label: string | null;
 }
 
 // Configure React-redux store functions

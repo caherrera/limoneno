@@ -225,7 +225,8 @@ export class ProjectTagComponent extends React.Component<any> {
       workout.tags.push(new DatasetItemTag({
         start: this.state.tmp_start,
         end: this.state.tmp_end,
-        type: entity.tag
+        type: entity.tag, 
+        label: entity.name
       }));
 
       this.setState({
@@ -270,7 +271,8 @@ export class ProjectTagComponent extends React.Component<any> {
     if (this.state.workout.documents) {
       return this.state.workout.tags.map((tag: DatasetItemTag, index: number) => {
         return {
-          type: tag.type,
+          type: tag.label,
+          label: tag.label,
           color: this.getColor(index)
         }
       });
@@ -279,6 +281,7 @@ export class ProjectTagComponent extends React.Component<any> {
     return this.state.project.entities.map((entity: Entity, index: number) => {
       return {
         type: entity.tag,
+        label: entity.name,
         color: this.getColor(index)
       }
     });
@@ -295,7 +298,7 @@ export class ProjectTagComponent extends React.Component<any> {
           <div className="text">Selecciona un trozo de texto y identificalo</div>
           <Button type="primary" className="separator__button" 
             onClick={this.tag.bind(this, new Entity({
-              tag: `Document`,
+              tag: `Document ${this.state.workout.tags.length + 1}`,
               name: `Document ${this.state.workout.tags.length + 1}`
             }), true)}>
             <Icon type="file-text"></Icon> Separar Documento
@@ -352,6 +355,12 @@ export class ProjectTagComponent extends React.Component<any> {
 
     this.setState({
       saving: true
+    });
+
+    this.state.workout.tags = this.state.workout.tags.map((tag: DatasetItemTag) => {
+      delete tag.label;
+      tag.type = (this.state.workout.documents) ? tag.type : 'Document';
+      return tag;
     });
 
     ClasificationService.getInstance()
