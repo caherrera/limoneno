@@ -1,0 +1,40 @@
+.entity {
+    .tags {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+    
+        .tag {
+            margin-right: 5px;
+            display: flex;
+            flex-direction: row;
+            border: 1px #CCC solid;
+            border-radius: 5px;
+            padding: 0px 5px;
+            background: #EFEFEF;
+            line-height: 25px;
+            cursor: pointer;
+
+            .title {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
+
+            .close {
+                padding-left: 5px;
+                font-size: 14px;
+            }
+        }
+    }
+
+    .description {
+        margin-top: 5px;
+    }  
+    
+    .description_label {
+        padding-top: 5px;
+        text-align: left;
+    }
+}

@@ -5,9 +5,10 @@ class CreateProjectDatasetItems < ActiveRecord::Migration[6.0]
       t.integer :user_id
       t.integer :dataset_id
       t.integer :dataset_item_id
-      t.string :clasification
+      t.json :clasification
       t.json :tags
       t.integer :status
+      t.boolean :documents
 
       t.timestamps
     end

@@ -37,9 +37,10 @@ ActiveRecord::Schema.define(version: 2019_08_26_031013) do
     t.integer "user_id"
     t.integer "dataset_id"
     t.integer "dataset_item_id"
-    t.string "clasification"
+    t.json "clasification"
     t.text "tags", size: :long, collation: "utf8mb4_bin"
     t.integer "status"
+    t.boolean "documents"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

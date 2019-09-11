@@ -10,10 +10,12 @@ import { getUsers } from '../../../../actions/dousers'
 import { getDatasets } from '../../../../actions/dodatasets';
 import { Project } from '../../../../models/project';
 import { Dataset } from '../../../../models/dataset';
-import { Clasification } from '../../../../models/clasification';
 import { Entity } from '../../../../models/entity';
 import { User } from '../../../../models/user';
 import ProjectService from '../../../../services/projects/projects.service';
+import ClasificatorSelectorComponent from '../../shared/clasification-selector/clasification-selector';
+import EntitiesSelectorComponent from '../../shared/entities-selector/entities-selector';
+import { Clasification } from '../../../../models/clasification';
 
 export class DraftProjectComponent extends React.Component<any> {
 
@@ -305,30 +307,6 @@ export class DraftProjectComponent extends React.Component<any> {
     )
   }
 
-  public addClasification(elements: any, event: any): any {
-    this.state.project.clasifications = elements.map((element: any) => {
-      return new Clasification({
-        name: element
-      })
-    });
-
-    this.setState({
-      project: this.state.project
-    });
-  }
-
-  public addEntities(elements: any, event: any): any {
-    this.state.project.entities = elements.map((element: any) => {
-      return new Entity({
-        name: element
-      })
-    });
-
-    this.setState({
-      project: this.state.project
-    });
-  }
-
   public activateEntities(type: number): any {
     if (type === 1 && this.state.project.clasification_type !== 1) {
       this.state.project.clasification_type += (this.state.clasification) ? -1 : 1;
@@ -351,11 +329,27 @@ export class DraftProjectComponent extends React.Component<any> {
     message.warning("Debe mantener al menos una de los tipos de identificación");
   }
 
+  public setClasifications(clasifications: Clasification[]): void {
+    let project = this.state.project;
+    project.clasifications = clasifications;
+    this.setState({
+      project: project
+    });
+  }
+
+  public setEntities(entities: Entity[]): void {
+    let project = this.state.project;
+    project.entities = entities;
+    this.setState({
+      project: project
+    });
+  }
+
   public entities(): any {
     return (
       <Form>
         <Form.Item className="inputs">
-        <div className="label">Clasificación de documentos:</div>
+          <div className="label">Clasificación de documentos:</div>
           <div className="checkbox">
             <Checkbox 
               onChange={this.activateEntities.bind(this, 1)}
@@ -366,13 +360,11 @@ export class DraftProjectComponent extends React.Component<any> {
             </span>
           </div>
           <div className="label">Ingrese las clasificaciones:</div>
-          <Select mode="tags" placeholder="Clasificaciones" 
-            onChange={this.addClasification.bind(this)}
-            disabled={!this.state.clasification}
-            defaultValue={this.state.project.clasifications.map((cla: any) => {
-              return cla.name;
-            })}>
-          </Select>
+          <ClasificatorSelectorComponent
+            disabled={this.state.clasification}
+            setClasifications={this.setClasifications.bind(this)}
+            clasifications={this.state.project.clasifications}
+          ></ClasificatorSelectorComponent>
         </Form.Item>
         <Form.Item className="inputs">
           <div className="label">Busqueda de entidades:</div>
@@ -386,13 +378,11 @@ export class DraftProjectComponent extends React.Component<any> {
             </span>
           </div>
           <div className="label">Ingrese las entidades:</div>
-          <Select mode="tags" placeholder="Entidades" 
-            onChange={this.addEntities.bind(this)}
-            disabled={!this.state.entities}
-            defaultValue={this.state.project.entities.map((ent: any) => {
-              return ent.name;
-            })}>
-          </Select>
+          <EntitiesSelectorComponent
+            disabled={this.state.entities}
+            setEntities={this.setEntities.bind(this)}
+            entities={this.state.project.entities} 
+          ></EntitiesSelectorComponent>
         </Form.Item>
         <Form.Item className="buttons">
           { this.navigationButton(2)}

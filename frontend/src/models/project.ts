@@ -40,7 +40,7 @@ export class Project {
         }
 
         if (project && project.clasifications) {
-            if (typeof project.clasifications    === 'string') {
+            if (typeof project.clasifications  === 'string') {
                 project.clasifications = JSON.parse(project.clasifications);
             }
             
