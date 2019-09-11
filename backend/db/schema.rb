@@ -13,14 +13,14 @@
 ActiveRecord::Schema.define(version: 2019_08_26_031013) do
 
   create_table "dataset_items", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.integer "dataset_id"
+    t.integer "dataset_id", null: false
     t.string "name"
     t.string "mime"
     t.text "text"
-    t.text "metadata", size: :long, collation: "utf8mb4_bin"
+    t.text "metadata"
     t.text "url"
-    t.integer "status"
     t.boolean "stored"
+    t.integer "status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(version: 2019_08_26_031013) do
     t.integer "user_id"
     t.integer "dataset_id"
     t.integer "dataset_item_id"
-    t.json "clasification"
+    t.text "clasification", size: :long
     t.text "tags", size: :long, collation: "utf8mb4_bin"
     t.integer "status"
     t.boolean "documents"

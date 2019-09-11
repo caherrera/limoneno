@@ -43,7 +43,7 @@ end
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 # Dotenv
-gem 'dotenv-rails', '~> 2.1', '>= 2.1.1', groups: %i[development test]
+gem 'dotenv-rails', '~> 2.1', '>= 2.1.1',:groups => [:development, :test, :production]
 
 # Mysql database
 gem 'mysql2'
