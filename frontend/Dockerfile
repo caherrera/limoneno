@@ -3,7 +3,7 @@ FROM node AS builder
 # Install yarn
 RUN npm install yarn -g
 # Define the work directory
-WORKDIR /thot-ui
+WORKDIR /limoneno
 # Copy the project
 COPY . .
 # Delete dev env file
@@ -22,7 +22,7 @@ RUN rm -rf /etc/nginx/conf.d
 # Copy the conf file
 COPY conf /etc/nginx
 # Copy from intermediate container
-COPY --from=builder /thot-ui/build /usr/share/nginx/html
+COPY --from=builder /limoneno/build /usr/share/nginx/html
 # Expose the port
 EXPOSE 80 
 # Run the server

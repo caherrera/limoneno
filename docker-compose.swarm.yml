@@ -1,0 +1,54 @@
+version: '3.5'
+services:
+  limoneno:
+    image: 786298960439.dkr.ecr.us-east-1.amazonaws.com/lemontech/case-flow
+    networks:
+      - traefik-net
+    deploy:
+      labels:
+        traefik.enable: "true"
+        traefik.port: 80
+        traefik.docker.network: traefik-net
+        traefik.frontend.priority: 3
+        traefik.frontend.rule: "Host:api.limoneno.lemontech.com"
+  limoneno-backend:
+    image: 786298960439.dkr.ecr.us-east-1.amazonaws.com/namku/ocr
+    networks:
+      - traefik-net
+    deploy:
+      labels:
+        traefik.enable: "true"
+        traefik.port: 50627
+        traefik.protocol: h2c
+        traefik.docker.network: traefik-net
+        traefik.frontend.entryPoints: http
+        traefik.frontend.rule: "Host:ocr.caseflow.lemontech.com"
+  midas:
+    image: 786298960439.dkr.ecr.us-east-1.amazonaws.com/namku/midas
+    environment:
+      OCR_ENDPOINT: ocr.caseflow.lemontech.com
+    networks:
+      - traefik-net
+    deploy:
+      labels:
+        traefik.enable: "true"
+        traefik.port: 50733
+        traefik.protocol: h2c
+        traefik.docker.network: traefik-net
+        traefik.frontend.entryPoints: http
+        traefik.frontend.rule: "Host:midas.caseflow.lemontech.com"
+  nlp:
+    image: 786298960439.dkr.ecr.us-east-1.amazonaws.com/lemontech/nlp
+    networks:
+      - traefik-net
+    deploy:
+      labels:
+        traefik.enable: "true"
+        traefik.protocol: h2c
+        traefik.port: 50680
+        traefik.docker.network: traefik-net
+        traefik.frontend.entryPoints: http
+        traefik.frontend.rule: "Host:nlp.caseflow.lemontech.com"
+networks:
+  traefik-net:
+    external: true

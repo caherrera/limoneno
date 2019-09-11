@@ -3,5 +3,5 @@
  * The docker replaces the file automatically if the react app deploy in production
  */
 export class Config {
-    public static API: string = 'http://localhost:8080/api'
+    public static API: string = 'http://api.limoneno.lemontech.com/api'
 }
