@@ -22,6 +22,8 @@ services:
         traefik.frontend.rule: "Host:limoneno.lemontech.com"
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
+    environment:
+      PMA_HOST: limoneno-testing.ccvvg39btzna.us-east-1.rds.amazonaws.com
     networks:
       - traefik-net
     deploy:
