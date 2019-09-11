@@ -7,9 +7,9 @@ test:
   port: 6379
 
 staging:
-  host: limoneno-testing-001.tmcxaq.0001.use1.cache.amazonaws.com
+  host: limoneno-staging.tmcxaq.0001.use1.cache.amazonaws.com
   port: 6379
 
 production:
-  host: limoneno-testing-001.tmcxaq.0001.use1.cache.amazonaws.com
+  host: limoneno-staging.tmcxaq.0001.use1.cache.amazonaws.com
   port: 6379
