@@ -15,7 +15,7 @@ RUN bundle install
 # Copy the app into the container
 COPY . .
 # Run the apidoc to make the api documentation
-RUN ["apidoc", "-o", "public/api"]
+# RUN ["apidoc", "-o", "public/api"]
 # replace the env file
 RUN mv .env.production .env
 # Expose port 5000 to
