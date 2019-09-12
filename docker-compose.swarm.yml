@@ -1,6 +1,6 @@
 version: '3.5'
 services:
-  limoneno:
+  limoneno-frontend:
     image: 786298960439.dkr.ecr.us-east-1.amazonaws.com/limoneno-frontend
     networks:
       - traefik-net
@@ -8,8 +8,9 @@ services:
       labels:
         traefik.enable: "true"
         traefik.port: 80
+        traefik.frontend.redirect.entryPoint: "https"
         traefik.docker.network: traefik-net
-        traefik.frontend.rule: "Host:api.limoneno.lemontech.com"
+        traefik.frontend.rule: "Host:limoneno.lemontech.com"
   limoneno-backend:
     image: 786298960439.dkr.ecr.us-east-1.amazonaws.com/limoneno-backend
     networks:
@@ -18,8 +19,9 @@ services:
       labels:
         traefik.enable: "true"
         traefik.port: 5000
+        traefik.frontend.redirect.entryPoint: "https"
         traefik.docker.network: traefik-net
-        traefik.frontend.rule: "Host:limoneno.lemontech.com"
+        traefik.frontend.rule: "Host:api.limoneno.lemontech.com"
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     environment:
@@ -30,6 +32,7 @@ services:
       labels:
         traefik.enable: "true"
         traefik.port: 80
+        traefik.frontend.redirect.entryPoint: "https"
         traefik.docker.network: traefik-net
         traefik.frontend.rule: "Host:db.limoneno.lemontech.com"
 networks:
