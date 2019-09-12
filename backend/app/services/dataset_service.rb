@@ -37,10 +37,12 @@ module DatasetService
       end
       
       result = self.save_dataset([{
+        dataset_id: file[:dataset_id],
         name: file[:name],
         text: data,
-        metadata: nil,
-        url: nil,
+        mime: file[:mime],
+        metadata: file[:metadata],
+        url: file[:url],
         status: 1,
         stored: stored
       }])
