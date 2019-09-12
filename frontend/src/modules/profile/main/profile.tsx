@@ -1,5 +1,6 @@
 import * as React from 'react';
 import './profile.scss';
+import logo from '../../../assets/svg/logo.svg';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
@@ -12,7 +13,8 @@ export class ProfileComponent extends React.Component {
     public render() {
         return (
             <div className="profile">
-                <div className="quote">Made with <span className="red">❤</span> by Lemontech</div>
+                <div className="logo"><img src={logo}></img></div>
+                <div className="quote">En construcción...</div>
             </div>
         )
     }

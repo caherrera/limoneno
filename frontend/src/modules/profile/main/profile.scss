@@ -1,9 +1,18 @@
 .profile {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     align-content: center;
     align-items: center;
     width: 100vw;
     height: 60px;
+
+    .logo {
+        width: 250px;
+        height: 100px;
+    }
+
+    .quote {
+        padding: 30px;
+    }
 }
