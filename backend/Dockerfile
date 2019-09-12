@@ -20,7 +20,7 @@ COPY . .
 RUN mv .env.production .env
 # Expose port 5000 to
 EXPOSE 5000
-# run DB migrations
-#RUN rake db:create db:migrate
+# Set env vars
+ENV RAILS_ENV production 
 # Run the app
-CMD ["bash", "-c", "rake db:create db:migrate db:seed && RAILS_ENV=production foreman start"] 
+CMD ["bash", "-c", "rake db:create db:migrate db:seed && foreman start"] 
