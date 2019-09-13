@@ -7,9 +7,9 @@ test:
   port: 6379
 
 staging:
-  host: limoneno-staging.tmcxaq.0001.use1.cache.amazonaws.com
+  host: <%= ENV['REDIS_HOST'] %>
   port: 6379
 
 production:
-  host: limoneno-staging.tmcxaq.0001.use1.cache.amazonaws.com
+  host: <%= ENV['REDIS_HOST'] %>
   port: 6379
