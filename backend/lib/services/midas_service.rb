@@ -7,7 +7,7 @@ require 'open-uri'
 module MidasService
   # Utils class to consume Midas OCR service
   class MidasClient
-    MIDAS_HOST = ENV['MIDAS_HOST']
+    MIDAS_HOST = ENV['OCR_HOST']
     FILE_ENCODING = 'ASCII-8BIT'
 
     # For PDF files use 'file_type = Midas::InputFormat::PDF'
